@@ -102,7 +102,7 @@ namespace Pain._001.Generator.Controllers
                             {
                                 Id = new AccountIdentification4ChoiceCH
                                 {
-                                    Item = faker.Finance.Iban(countryCode: "CH")
+                                    Item = "CH4608750063680674002"
                                 }
                             },
                             RmtInf = new RemittanceInformation5CH
