@@ -11,7 +11,7 @@ namespace Pain._001.Generator.Controllers
     public class GeneratorController : ControllerBase
     {
         [HttpGet("{payments}")]
-        public ActionResult GeneratePaymentFile([FromRoute] int payments)
+        public async Task<ActionResult<string>> GeneratePaymentFile([FromRoute] int payments)
         {
             var faker = new Faker("en");
             var paymentList = new List<PaymentInstructionInformation3CH>();
@@ -25,6 +25,7 @@ namespace Pain._001.Generator.Controllers
                         MsgId = $"MSG-{Guid.NewGuid().ToString().Substring(0,5)}",
                         CreDtTm = DateTime.Now,
                         CtrlSum = payments * 10,
+                        CtrlSumSpecified = true,
                         NbOfTxs = payments.ToString(),
                         InitgPty = new PartyIdentification32CH_NameAndId
                         {
@@ -58,7 +59,7 @@ namespace Pain._001.Generator.Controllers
                     {
                         Id = new AccountIdentification4ChoiceCH
                         {
-                            Item = "CH5481230000001998736",
+                            Item = "CH1608750063000104015",
                         }
                     },
                     DbtrAgt = new BranchAndFinancialInstitutionIdentification4CH_BicOrClrId
@@ -101,7 +102,7 @@ namespace Pain._001.Generator.Controllers
                             {
                                 Id = new AccountIdentification4ChoiceCH
                                 {
-                                    Item = faker.Finance.Iban(countryCode: "CH")
+                                    Item = "CH4608750063680674002"
                                 }
                             },
                             RmtInf = new RemittanceInformation5CH
@@ -140,7 +141,8 @@ namespace Pain._001.Generator.Controllers
 
             var xmlSettings = new XmlWriterSettings()
             {
-                Encoding = System.Text.Encoding.UTF8
+                Encoding = Encoding.UTF8,
+                Indent = true,
             };
 
             var writer = XmlWriter.Create(ms, xmlSettings);
@@ -153,7 +155,7 @@ namespace Pain._001.Generator.Controllers
 
             var file = Convert.ToBase64String(buffer);
 
-            return Ok(content);
+            return Ok(file);
 
         }
     }
