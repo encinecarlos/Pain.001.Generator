@@ -22,7 +22,7 @@ namespace Pain._001.Generator.Controllers
                 {
                     GrpHdr = new GroupHeader32CH
                     {
-                        MsgId = Guid.NewGuid().ToString(),
+                        MsgId = $"MSG-{Guid.NewGuid().ToString().Substring(0,5)}",
                         CreDtTm = DateTime.Now,
                         CtrlSum = payments * 10,
                         NbOfTxs = payments.ToString(),
@@ -38,7 +38,7 @@ namespace Pain._001.Generator.Controllers
             {
                 var paymentInfo = new PaymentInstructionInformation3CH
                 {
-                    PmtInfId = Guid.NewGuid().ToString(),
+                    PmtInfId = $"PMT-{Guid.NewGuid().ToString().Substring(0,5)}",
                     PmtMtd = PaymentMethod3Code.TRF,
                     BtchBookgSpecified = true,
                     BtchBookg = true,
@@ -94,7 +94,7 @@ namespace Pain._001.Generator.Controllers
                                     BldgNb = faker.Random.Int(10, 50).ToString(),
                                     PstCd = faker.Address.CountryCode(),
                                     TwnNm = faker.Address.CitySuffix(),
-                                    Ctry = faker.Address.City()
+                                    Ctry = "CH"
                                 }
                             },
                             CdtrAcct = new CashAccount16CH_Id
