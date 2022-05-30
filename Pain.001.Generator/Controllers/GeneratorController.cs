@@ -24,7 +24,7 @@ namespace Pain._001.Generator.Controllers
                     {
                         MsgId = $"MSG-{Guid.NewGuid().ToString().Substring(0,5)}",
                         CreDtTm = DateTime.Now,
-                        CtrlSum = payments * 10,
+                        CtrlSum = payments * 500,
                         CtrlSumSpecified = true,
                         NbOfTxs = payments.ToString(),
                         InitgPty = new PartyIdentification32CH_NameAndId
@@ -83,7 +83,7 @@ namespace Pain._001.Generator.Controllers
                                 Item = new ActiveOrHistoricCurrencyAndAmount
                                 {
                                     Ccy = "CHF",
-                                    Value = i * 10
+                                    Value = 500
                                 }
                             },
                             Cdtr = new PartyIdentification32CH_Name
