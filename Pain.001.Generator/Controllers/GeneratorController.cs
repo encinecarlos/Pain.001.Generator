@@ -11,7 +11,7 @@ namespace Pain._001.Generator.Controllers
     public class GeneratorController : ControllerBase
     {
         [HttpGet("{payments}")]
-        public async Task<ActionResult<string>> GeneratePaymentFile([FromRoute] int payments)
+        public ActionResult<string> GeneratePaymentFile([FromRoute] int payments)
         {
             var faker = new Faker("en");
             var paymentList = new List<PaymentInstructionInformation3CH>();
@@ -141,12 +141,12 @@ namespace Pain._001.Generator.Controllers
 
             var xmlSettings = new XmlWriterSettings()
             {
-                Encoding = Encoding.UTF8,
+                Encoding = new UTF8Encoding(false),
                 Indent = true,
             };
 
-            var writer = XmlWriter.Create(ms, xmlSettings);
-
+            using var writer = XmlWriter.Create(ms, xmlSettings);
+            
             pain001.Serialize(writer, painDocument);
 
             byte[] buffer = ms.ToArray();
