@@ -14,6 +14,9 @@ namespace Pain._001.Generator.Controllers
         public ActionResult<string> GeneratePaymentFile([FromRoute] int payments)
         {
             var faker = new Faker("en");
+
+            var paymentAmount = faker.Finance.Amount(100, 10000);
+
             var paymentList = new List<PaymentInstructionInformation3CH>();
 
             var painDocument = new Document
@@ -24,7 +27,7 @@ namespace Pain._001.Generator.Controllers
                     {
                         MsgId = $"MSG-{Guid.NewGuid().ToString().Substring(0,5)}",
                         CreDtTm = DateTime.Now,
-                        CtrlSum = payments * 500,
+                        CtrlSum = paymentAmount * payments,
                         CtrlSumSpecified = true,
                         NbOfTxs = payments.ToString(),
                         InitgPty = new PartyIdentification32CH_NameAndId
@@ -75,15 +78,15 @@ namespace Pain._001.Generator.Controllers
                         {
                             PmtId = new PaymentIdentification1
                             {
-                                InstrId = "INSTRID-02-01",
-                                EndToEndId = $"ENDTOENDID-{faker.Random.Int(1000,10000)}"
+                                InstrId = $"INSTRID-02-{faker.Random.AlphaNumeric(2)}",
+                                EndToEndId = $"ENDTOENDID-{faker.Random.AlphaNumeric(5)}"
                             },
                             Amt = new AmountType3Choice
                             {
                                 Item = new ActiveOrHistoricCurrencyAndAmount
                                 {
                                     Ccy = "CHF",
-                                    Value = 500
+                                    Value = paymentAmount
                                 }
                             },
                             Cdtr = new PartyIdentification32CH_Name
@@ -122,7 +125,7 @@ namespace Pain._001.Generator.Controllers
                                     },
                                     AddtlRmtInf = new string[]
                                     {
-                                        "ref info test"
+                                        $"ref info test {faker.Random.AlphaNumeric(5)}"
                                     }
                                 }
                             }
