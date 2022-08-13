@@ -76,7 +76,7 @@ namespace Pain._001.Generator.Controllers
                             PmtId = new PaymentIdentification1
                             {
                                 InstrId = "INSTRID-02-01",
-                                EndToEndId = "ENDTOENDID-QRR"
+                                EndToEndId = $"ENDTOENDID-{faker.Random.Int(1000,10000)}"
                             },
                             Amt = new AmountType3Choice
                             {
