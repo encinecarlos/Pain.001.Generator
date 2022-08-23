@@ -62,7 +62,7 @@ namespace Pain._001.Generator.Controllers
                     {
                         Id = new AccountIdentification4ChoiceCH
                         {
-                            Item = "CH1608750063000104015",
+                            Item = "CH1408750509158434015",
                         }
                     },
                     DbtrAgt = new BranchAndFinancialInstitutionIdentification4CH_BicOrClrId
@@ -105,7 +105,7 @@ namespace Pain._001.Generator.Controllers
                             {
                                 Id = new AccountIdentification4ChoiceCH
                                 {
-                                    Item = "CH4608750063680674002"
+                                    Item = "CH4108750509158434014"
                                 }
                             },
                             RmtInf = new RemittanceInformation5CH
